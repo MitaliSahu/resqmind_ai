@@ -1,0 +1,20 @@
+resqmind-ai/
+│
+├── app.py                   # Main Streamlit application file
+├── database.py              # SQLite database configuration and queries
+├── ml_engine.py             # XGBoost model loading and prediction logic
+├── rag_assistant.py         # LangChain, FAISS, and Gemini API integration
+│
+├── data/                    
+│   ├── hospital.db          # Local SQLite database file (auto-generated)
+│   ├── patient_history.csv  # Dataset used for training the ML model
+│   └── guidelines/          # Folder for clinical PDFs and protocols
+│       └── triage_rules.pdf 
+│
+├── models/                  
+│   ├── triage_xgboost.pkl   # The trained Machine Learning model
+│   └── faiss_index/         # Folder containing the local FAISS vector store
+│
+├── requirements.txt         # List of Python dependencies
+├── .env                     # Hidden file to store your Gemini API Key securely
+└── README.md                # Project documentation and setup instructions
