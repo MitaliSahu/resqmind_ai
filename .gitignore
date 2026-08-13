@@ -3,4 +3,4 @@ venv/
 __pycache__/
 *.pyc
 .env
-faiss_index/
+faiss_index/.env

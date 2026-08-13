@@ -14,7 +14,7 @@ def setup_rag():
     if not api_key or api_key == "your_actual_api_key_here":
         return None
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004", google_api_key=api_key)
     
     # Initialize emergency guideline data if local vector store is empty
     if not os.path.exists(FAISS_INDEX_PATH) or not os.listdir(FAISS_INDEX_PATH):
