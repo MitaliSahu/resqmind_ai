@@ -14,9 +14,9 @@ def setup_rag():
     if not api_key or api_key == "your_actual_api_key_here":
         return None
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004", google_api_key=api_key)
+    # Using the standard active Google embedding identifier
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001", google_api_key=api_key)
     
-    # Initialize emergency guideline data if local vector store is empty
     if not os.path.exists(FAISS_INDEX_PATH) or not os.listdir(FAISS_INDEX_PATH):
         docs = [
             Document(page_content="Critical Priority: SpO2 < 88%, severe chest pain, loss of consciousness, severe trauma. Requires immediate ICU or resuscitation room."),
@@ -28,7 +28,9 @@ def setup_rag():
     else:
         vectorstore = FAISS.load_local(FAISS_INDEX_PATH, embeddings, allow_dangerous_deserialization=True)
 
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key)
+    # Using gemini-pro which is natively fully compatible with LangChain's legacy/standard RetrievalQA chain
+    llm = ChatGoogleGenerativeAI(model="gemini-flash-latest", google_api_key=api_key, temperature=0.2, convert_system_message_to_human=True)
+
     qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=vectorstore.as_retriever())
     return qa_chain
 
